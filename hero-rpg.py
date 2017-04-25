@@ -33,6 +33,10 @@ class Character:
     def print_status(self):
         print("The {} has {} health and {} power.".format(self.name, self.health, self.power))
 
+class Zombie(Character):
+    def alive(self):
+        return True #zombie will never die
+
 
 # class Hero(Character):
 #     # def __init__(self, health, power):
@@ -79,41 +83,44 @@ def main():
 
     hero = Character("hero", 10, 5)
     goblin1 = Character("goblin", 6, 2)
+    zombie = Zombie('zombie', 6, 1)
 
-    while goblin1.alive() and hero.alive():
-        hero.print_status()
-        goblin1.print_status()
-        # print("You have {} health and {} power.".format(hero.health, hero.power))
-        # print("The goblin has {} health and {} power.".format(goblin1.health, goblin1.power))
-        print()
-        print("What do you want to do?")
-        print("1. fight goblin")
-        print("2. do nothing")
-        print("3. flee")
-        print("> ", end=' ')
-        inpt = input()
-        if inpt == "1":
-            # Hero attacks goblin
-            hero.attack(goblin1)
-            #goblin1.health -= hero.power
-            #print("You do {} damage to the goblin.".format(hero.power))
-            #if goblin1.health <= 0:
-                #print("The goblin is dead.")
-        elif inpt == "2":
-            pass
-        elif inpt == "3":
-            print("Goodbye.")
-            break
-        else:
-            print("Invalid inpt {}".format(inpt))
+    def combat(hero, enemy):
+        while enemy.alive() and hero.alive():
+            hero.print_status()
+            enemy.print_status()
+            # print("You have {} health and {} power.".format(hero.health, hero.power))
+            # print("The goblin has {} health and {} power.".format(goblin1.health, goblin1.power))
+            print()
+            print("What do you want to do?")
+            print("1. fight {}".format(enemy.name))
+            print("2. do nothing")
+            print("3. flee")
+            print("> ", end=' ')
+            inpt = input()
+            if inpt == "1":
+                # Hero attacks goblin
+                hero.attack(enemy)
+                #goblin1.health -= hero.power
+                #print("You do {} damage to the goblin.".format(hero.power))
+                #if goblin1.health <= 0:
+                    #print("The goblin is dead.")
+            elif inpt == "2":
+                pass
+            elif inpt == "3":
+                print("Goodbye.")
+                break
+            else:
+                print("Invalid inpt {}".format(inpt))
 
-        if goblin1.alive():
-            # Goblin attacks hero
-            #hero.health -= goblin1.power
-            #print("The goblin does {} damage to you.".format(goblin1.power))
-            #if hero.health <= 0:
-            #    print("You are dead.")
-            goblin1.attack(hero)
+            if enemy.alive():
+                # Goblin attacks hero
+                #hero.health -= goblin1.power
+                #print("The goblin does {} damage to you.".format(goblin1.power))
+                #if hero.health <= 0:
+                #    print("You are dead.")
+                enemy.attack(hero)
+    combat(hero, goblin1)
 
 if __name__ == "__main__":
   main()
