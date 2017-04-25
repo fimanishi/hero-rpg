@@ -37,49 +37,7 @@ class Zombie(Character):
     def alive(self):
         return True #zombie will never die
 
-
-# class Hero(Character):
-#     # def __init__(self, health, power):
-#     #     self.health = health
-#     #     self.power = power
-#
-#     def attack(self, enemy):
-#         enemy.health -= self.power
-#         print("You do {} damage to the goblin.".format(self.power))
-#         if enemy.health <= 0:
-#             print("The goblin is dead.")
-
-    # def alive(self):
-    #     if self.health > 0:
-    #         return True
-
-#     def print_status(self):
-#         print("You have {} health and {} power.".format(self.health, self.power))
-#
-# class Goblin(Character):
-#     # def __init__(self, health, power):
-#     #     self.health = health
-#     #     self.power = power
-#
-#     def attack(self, enemy):
-#         # Goblin attacks hero
-#         enemy.health -= self.power
-#         print("The goblin does {} damage to you.".format(self.power))
-#         if enemy.health <= 0:
-#             print("You are dead.")
-#
-#     # def alive(self):
-#     #     if self.health > 0:
-#     #         return True
-#
-#     def print_status(self):
-#         print("The goblin has {} health and {} power.".format(self.health, self.power))
-
 def main():
-    #hero_health = 10
-    #hero_power = 5
-    #goblin_health = 6
-    #goblin_power = 2
 
     hero = Character("hero", 10, 5)
     goblin1 = Character("goblin", 6, 2)
