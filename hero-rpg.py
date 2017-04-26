@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+
 """
 In this simple RPG game, the hero fights the goblin. He has the options to:
 
@@ -10,7 +11,7 @@ In this simple RPG game, the hero fights the goblin. He has the options to:
 """
 
 class Character:
-    def __init__(self, name ,health, power):
+    def __init__(self, name, health, power):
         self.name = name
         self.health = health
         self.power = power
@@ -22,9 +23,9 @@ class Character:
     def attack(self, enemy):
         enemy.health -= self.power
         if self.name == "hero":
-            print("You do {} damage to the goblin.".format(self.power))
+            print("You do {} damage to the {}.".format(self.power, enemy.name))
             if not enemy.alive():
-                print("The goblin is dead.")
+                print("The {} is dead.".format(enemy.name))
         elif enemy.name == "hero":
             print("The {} does {} damage to you.".format(self.name, self.power))
             if not enemy.alive():
@@ -35,13 +36,14 @@ class Character:
 
 class Zombie(Character):
     def alive(self):
+        self.health = 0
         return True #zombie will never die
 
 def main():
 
     hero = Character("hero", 10, 5)
     goblin1 = Character("goblin", 6, 2)
-    zombie = Zombie('zombie', 6, 1)
+    zombie = Zombie('zombie', 110, 1)
 
     def combat(hero, enemy):
         while enemy.alive() and hero.alive():
@@ -78,7 +80,7 @@ def main():
                 #if hero.health <= 0:
                 #    print("You are dead.")
                 enemy.attack(hero)
-    combat(hero, goblin1)
+    combat(hero, zombie)
 
 if __name__ == "__main__":
   main()
