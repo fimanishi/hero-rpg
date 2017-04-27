@@ -4,10 +4,14 @@ from characters.base import Character
 from random import randint
 
 class Fighter(Character):
+    special_ability = "critical damage"
     def __init__(self, *args, criticalp = 25, critical = 2, **kwargs):
         super().__init__(*args, **kwargs)
         self.criticalp = criticalp  # percentage of chance of having a critical attack
         self.critical = critical    # multiplication factor
+        self.prize = 8
+        self.health = 10
+        self.power = 4
 
     def attack(self, enemy):
         original = self.power

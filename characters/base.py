@@ -3,7 +3,7 @@
 # base class for all characters
 class Character:
 
-    def __init__(self, name = "", health=0, power = 0, power_range=[], prize = 0, dodge = 0):
+    def __init__(self, name = "", health=0, power = 0, power_range=[], prize = 0, dodge = 0, user = False):
         self.name = name                # takes a string that represents the character's name
         if not self.name:               # checks if a name was given, if not gives it its class' name
             self.name = self.__class__.__name__
@@ -13,6 +13,7 @@ class Character:
         self.dodge = dodge              # takes an integer that represents the probability of dodging in percent
         self.power_range = power_range  # takes a list with two integers that represents the
                                         # maximum and minimum damage
+        self.user = user                # identifies if the character is the user
 
     # checks if the health of the character is greater than zero
     def alive(self):
@@ -25,20 +26,20 @@ class Character:
 
     # prints the messages of the damage inflicted and checks if the enemy is alive. if not, prints that it's dead
     def print_damage(self, enemy):
-        if self.__class__.__name__ == "Fighter": # checks if the attacker is the user
+        if self.user == True: # checks if the attacker is the user
             print("You do {} damage to the {}.".format(self.power, enemy.name))
             if not enemy.alive():
                 print("The {} is dead.".format(enemy.name))
-        elif enemy.__class__.__name__ == "Fighter": # checks if the character being attacked is the user
+        elif self.user == False: # checks if the character being attacked is the user
             print("The {} does {} damage to you.".format(self.name, self.power))
             if not enemy.alive():
                 print("You are dead.")
 
     # prints the message in case the character is able to dodge an attack
     def print_dodge(self, enemy):
-        if self.__class__.__name__ == "Fighter": # checks if the attacker is the user
+        if self.user == True: # checks if the attacker is the user
             print("The {} dodged the attack".format(enemy.name))
-        elif enemy.__class__.__name__ == "Fighter": # checks if the character being attacked is the user
+        elif enemy.user == False: # checks if the character being attacked is the user
             print("You dodged the attack.")
 
     # attacks the enemy

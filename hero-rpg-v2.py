@@ -2,6 +2,8 @@
 
 import mechanics.mech as mechanics
 
+from characters.shadow import Shadow
+
 """
 In this simple RPG game, the hero fights the goblin. He has the options to:
 
@@ -12,10 +14,11 @@ In this simple RPG game, the hero fights the goblin. He has the options to:
 """
 
 def main():
-    hero = mechanics.define_heroes()
-    shadow = mechanics.define_test()
+    user = mechanics.heroes_menu()
+    enemy = mechanics.choose_enemy()
 
-    mechanics.combat(hero, shadow)
+
+    mechanics.combat(user, enemy)
 
 if __name__ == "__main__":
   main()

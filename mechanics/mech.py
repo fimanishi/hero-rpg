@@ -5,18 +5,50 @@ from characters.fighter import Fighter
 from characters.zombie import Zombie
 from characters.medic import Medic
 from characters.shadow import Shadow
+import random
 
-    # hero = Hero(name = "hero", health = 10, power = 5)
-    # goblin1 = Character(name = "goblin", health = 6, power = 2)
-    # zombie = Zombie(power = 1)
-    # medic = Medic(health = 10, power = 2, heal = 2)
-    # shadow = Shadow(power = 1)
+c_dict = {"Fighter": Fighter, "Medic": Medic, "Shadow": Shadow}#, "Zombie": Zombie()}
 
 
 def heroes_menu():
-    return Fighter(name = "Test")
+    print("="*80)
+    print("{:^80}".format("Welcome to Honey Badger's RPG Game!"))
+    print("="*80)
+    print()
+    print("Let's start! Please choose a character number!")
+    print()
+    j = 1
+    c_list = []
+    for i in c_dict.values():
+        i = i()
+        print("{counter}. {name:10} - Health: {health:<3} - Power: {power:<3} - Special ability: {special_ability}".format(
+        counter=j, name=i.name, health=i.health, power=i.power, special_ability=i.special_ability))
+        c_list.append(i)
+        j += 1
+    while True:
+        print()
+        try:
+            choice = int(input("Select your character's number: "))
+            if choice >= 1 and choice <= len(c_dict):
+                print()
+                user_name = input("Please choose a name: ")
+                user = c_list[choice-1]
+                if user_name != "":
+                    user.name = user_name
+                print()
+                print("Welcome {}, you are a {}! Good luck!".format(user.name, user.__class__.__name__))
+                print()
+                user.user = True
+                return user
+            else:
+                print("Please enter a valid number.")
+        except ValueError:
+            print("Please enter a valid number.")
 
 
+def choose_enemy():
+    enemy = random.choice(list(c_dict.keys()))
+    return c_dict.pop(enemy)()
 
 
 def print_playing_menu(enemy):
@@ -36,10 +68,6 @@ def print_playing_menu(enemy):
         except ValueError:
             print("Invalid inpt {}".format(inpt))
     return inpt
-
-
-def define_heroes():
-    return Fighter(name = "hero", health = 10, power = 5)
 
 def define_test():
     return Medic(health = 10, power = 2, heal = 2)
